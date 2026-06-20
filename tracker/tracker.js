@@ -7,7 +7,7 @@ const RETRY_BASE_DELAY = 1000;
 let sessionId = null;
 let queue = [];
 
-export const generateUUID = () => {
+const generateUUID = () => {
   if (crypto?.randomUUID) {
     return crypto.randomUUID();
   }
@@ -19,7 +19,7 @@ export const generateUUID = () => {
   });
 };
 
-export const getOrCreateSessionId = () => {
+const getOrCreateSessionId = () => {
   try {
     const existing = localStorage.getItem(SESSION_STORAGE_KEY);
 
@@ -89,7 +89,7 @@ const sendBatch = async (events, attempt = 1) => {
   }
 };
 
-export const flush = () => {
+const flush = () => {
   if (!queue.length) return;
 
   const batch = [...queue];
@@ -116,11 +116,11 @@ const flushOnUnload = () => {
   }
 };
 
-export const trackPageView = () => {
+const trackPageView = () => {
   enqueue(buildEvent("page_view"));
 };
 
-export const trackClick = (event) => {
+const trackClick = (event) => {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
@@ -146,7 +146,7 @@ export const trackClick = (event) => {
   );
 };
 
-export const initAnalytics = () => {
+const initAnalytics = () => {
   sessionId = getOrCreateSessionId();
 
   if (!sessionId) {
