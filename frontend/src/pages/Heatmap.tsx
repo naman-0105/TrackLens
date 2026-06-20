@@ -49,6 +49,8 @@ const ZOOM_STEP = 0.1;
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 1;
 
+const VITE_SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
+
 export default function Heatmap() {
   const [selectedPage, setSelectedPage] = useState("");
   const [zoom, setZoom] = useState(0.8);
@@ -229,7 +231,7 @@ export default function Heatmap() {
             >
               <img
                 ref={imgRef}
-                src={`http://localhost:5000${snapshot}`}
+                src={`${VITE_SOCKET_URL}${snapshot}`}
                 alt="Page Snapshot"
                 className="block"
                 onLoad={handleImageLoad}
