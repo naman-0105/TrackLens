@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products — Demo Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="brand">
+        Demo Website
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pricing">Pricing</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <h1>Products</h1>
+      <p>A small product grid for testing add-to-cart clicks and heatmap density.</p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="product-grid" id="product-grid">
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        Demo Website
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pricing">Pricing</a>
+      </div>
+      <div class="footer-note">Demo site &middot; tracker.js session data only &middot; not a real product</div>
+    </div>
+  </footer>
+
+  <script>
+    let PRODUCTS = [
+      { name: 'Pulse Headphones', price: '$129.00', color: '#5b4cf0', icon: '🎧' },
+      { name: 'Aero Backpack', price: '$89.00', color: '#00b8a9', icon: '🎒' },
+      { name: 'Orbit Smartwatch', price: '$219.00', color: '#ff7a59', icon: '⌚' },
+      { name: 'Lumen Desk Lamp', price: '$54.00', color: '#f6b93b', icon: '💡' },
+      { name: 'Drift Mechanical Keyboard', price: '$149.00', color: '#5b4cf0', icon: '⌨️' },
+      { name: 'Nimbus Travel Mug', price: '$24.00', color: '#00b8a9', icon: '☕' },
+      { name: 'Vector Sunglasses', price: '$74.00', color: '#ff7a59', icon: '🕶️' },
+      { name: 'Halo Ring Light', price: '$39.00', color: '#f6b93b', icon: '⭕' }
+    ];
+
+    let grid = document.getElementById('product-grid');
+
+    PRODUCTS.forEach(function (product) {
+      let card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML =
+        '<div class="product-thumb" style="background:' + product.color + '">' + product.icon + '</div>' +
+        '<div class="product-body">' +
+          '<div class="product-title">' + product.name + '</div>' +
+          '<div class="product-price">' + product.price + '</div>' +
+          '<button class="btn btn-primary btn-block" type="button">Add to cart</button>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+    
+    grid.addEventListener('click', function (e) {
+      let btn = e.target.closest('button');
+      if (!btn) return;
+      let original = btn.textContent;
+      btn.textContent = 'Added';
+      setTimeout(function () {
+        btn.textContent = original;
+      }, 1200);
+    });
+  </script>
+
+  <script type="module" src="../tracker/tracker.js""></script>
+</body>
+</html>
