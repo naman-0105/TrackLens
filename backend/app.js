@@ -66,6 +66,8 @@ if (process.env.NODE_ENV !== "test") {
   app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 }
 
+app.set("trust proxy", 1);
+
 const apiLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 300,

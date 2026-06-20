@@ -13,6 +13,7 @@ if (!fs.existsSync(SCREENSHOT_DIR)) {
 export const captureScreenshot = async (url) => {
   const browser = await chromium.launch({
     headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   try {
